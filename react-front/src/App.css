@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background: #005aa7;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #005aa7, #fffde4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #005aa7, #d25454);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    @apply flex flex-col w-screen h-screen p-2 
+    /* bg-slate-600 */
+}
+
+
+.posts-list {
+    @apply flex flex-col w-full items-center
+}
+
+.post {
+    background: rgba(255, 255, 255, .05);
+    @apply flex flex-col h-64 col-span-1 rounded-xl mb-5 p-5 w-2/4 bg-cover bg-no-repeat bg-center cursor-pointer
+}
+
+
+.post:hover {
+    @apply border-2 border-slate-100
+}
+
+.post .post__header {
+    @apply flex w-full h-2/5 font-black mb-5
+}
+
+.post .post__header p {
+    @apply flex bg-cyan-50 max-w-full min-h-min
+}
+
+.post .post__header p span {
+    @apply  h-min rounded-sm text-4xl break-words w-full max-h-full overflow-y-clip 
+}
+
+.post .post__text {
+    @apply flex w-full h-3/5 overflow-y-clip
+}
+
+.post .post__text p {
+    @apply flex max-w-full bg-cyan-200 h-min 
+}
+
+.post .post__text p span {
+    @apply  h-min rounded-sm  max-h-full w-full break-words overflow-y-clip 
+}
+
+#posts-list__end{
+    @apply animate-spin flex w-10 h-1 bg-none
+}
+
+
+.main-content {
+    /* this tag is mainly just to make side menu work */
+    @apply flex flex-row divide-y-8 my-20
+}
+
+.main-background-color {
+    @apply 
+    bg-slate-800  bg-opacity-50
+}
+.header {
+    transition: .5s;
+    @apply flex flex-row w-full items-center justify-between fixed h-10 overflow-hidden 
+}
+
+
+.form-wrapper input {
+    @apply bg-slate-400 rounded-sm m-8 h-10 placeholder-gray-500
+}
