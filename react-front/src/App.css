@@ -15,6 +15,9 @@ body {
     /* bg-slate-600 */
 }
 
+button, input[type="submit"]{
+    @apply hover:text-slate-100 hover:bg-slate-500 rounded-xl
+}
 
 .posts-list {
     @apply flex flex-col w-full items-center
