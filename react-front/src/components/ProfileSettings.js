@@ -10,9 +10,9 @@ function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: r
     useEffect(() => {
 
         async function _() {
-            const image = await userApi.getProfileAvatarById(profileData?.profilePictureId)
-            console.log(image)
-            setAvatarPreview(URL.createObjectURL(image))
+            const image = await userApi.getProfileAvatarByImageId(profileData?.profilePictureId)
+
+            setAvatarPreview(image ? URL?.createObjectURL(image) : null)
         }
         if (profileData){
             _()
@@ -38,7 +38,6 @@ function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: r
     }
 
     const addAvatarToProfile = async (e) => {
-        console.log("adasd")
         const answer = await userApi.addProfileAvatar({ profileId: profileData.id, avatar: avatar, cookie: cookie })
         console.log(answer)
     }
@@ -105,7 +104,7 @@ function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: r
 
                 <li className="flex flex-row w-full my-2">
                     <div className="flex w-1/2 justify-end items-center mr-4 rounded-xl h-64 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('" + avatarPreview + "')" }}>
-                        {avatarPreview ? "" :  "Аватарка"}
+                        {avatarPreview ? "" :  "Место для фотографии профиля"}
                     </div>
 
                     <input type={"file"} onChange={handleFileUpdate} name="avatar" className="flex w-1/2 h-full justify-center items-center opacity bg-transparent  resize-none">

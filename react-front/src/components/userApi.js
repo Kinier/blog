@@ -1,9 +1,10 @@
 import jwtDecode from "jwt-decode"
 
 const URL = "http://localhost:5000/users"
+
 class userApi {
 
-    async getProfileAvatarById(id){
+    async getProfileAvatarByImageId(id) {
         let response = null
         try {
             response = await fetch(URL + `/profile/image/${id}`)
@@ -11,16 +12,17 @@ class userApi {
             console.log(e.message)
         }
 
-        return (response.blob())
+        return response?.blob()
+
     }
 
-    async addProfileAvatar({avatar: avatar, profileId: profileId, cookie: cookie}){
+    async addProfileAvatar({avatar: avatar, profileId: profileId, cookie: cookie}) {
         let response = null
         let fd = new FormData()
-        
+
         fd.append("avatar", avatar)
         try {
-            response = await fetch(URL+ `/profile/${profileId}/image`, {
+            response = await fetch(URL + `/profile/${profileId}/image`, {
                 method: "PATCH",
                 body: fd,
                 headers: {
@@ -31,13 +33,17 @@ class userApi {
             console.log(error.message + "Ошибка ")
         }
 
-        return response.json()
+        if (!response?.ok){
+            return null
+        }else{
+            return (response.json())
+        }
     }
 
-    async patchUserInfo({key: key, value: value, userId: userId, cookie: cookie}){
+    async patchUserInfo({key: key, value: value, userId: userId, cookie: cookie}) {
         let response = null
         try {
-            response = await fetch(URL+ `/${userId}`, {
+            response = await fetch(URL + `/${userId}`, {
                 method: "PATCH",
                 body: JSON.stringify({[key]: value}),
                 headers: {
@@ -52,65 +58,69 @@ class userApi {
         return response.json()
     }
 
-    async getUserInfo({cookie : cookie}){
+    async getUserInfo({cookie: cookie}) {
         let response = null
 
         try {
-            response = await fetch(URL + '/profile' , {
+            response = await fetch(URL + '/profile', {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${cookie?.jwt}`
                 },
-                
+
             })
         } catch (e) {
             console.log(e.message + "Ошибка ")
         }
 
-        
-        return (response.json())
+        if (!response?.ok){
+            return null
+        }else{
+            return (response.json())
+        }
+
     }
 
-/**
- *get user username, name, surname, id
- *
- * @param {*} {id : id}
- * @return {*} 
- * @memberof userApi
- */
-async getSomeUserInfo({id : id}){
+    /**
+     *get user username, name, surname, id
+     *
+     * @param {*} {id : id}
+     * @return {*}
+     * @memberof userApi
+     */
+    async getSomeUserInfo({id: id}) {
         let response = null
 
         try {
-            response = await fetch(URL + `/someinfo/${id}` , {
+            response = await fetch(URL + `/someinfo/${id}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                
+
             })
         } catch (e) {
             console.log(e.message + "Ошибка ")
         }
 
-        
+
         return (response.json())
     }
-    
-    async register({ username: username, email: email, password: password }) {
+
+    async register({username: username, email: email, password: password}) {
         let response = null
 
-         console.log(JSON.stringify({"username": username, "email": email, "password": password}))
-        
+        console.log(JSON.stringify({"username": username, "email": email, "password": password}))
+
         try {
-            response = await fetch(URL+ '/register', {
+            response = await fetch(URL + '/register', {
                 method: "POST",
                 body: JSON.stringify({"username": username, "email": email, "password": password}),
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                
+
             })
         } catch (e) {
             console.log(e.message)
@@ -121,11 +131,11 @@ async getSomeUserInfo({id : id}){
         return (response.json())
     }
 
-    async login({ email: email, password: password }) {
+    async login({email: email, password: password}) {
         let response = null
 
         try {
-            response = await fetch(URL+ '/login', {
+            response = await fetch(URL + '/login', {
                 method: "POST",
                 body: JSON.stringify({"email": email, "password": password}),
                 headers: {
@@ -141,7 +151,7 @@ async getSomeUserInfo({id : id}){
         return (response.json())
     }
 
-    
+
 }
 
 
