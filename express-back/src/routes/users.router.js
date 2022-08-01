@@ -123,12 +123,18 @@ router.route("/:id").patch(authMiddleware,async (req,res) =>{
 
 router.route("/profile/:id/image").patch(authMiddleware, upload, async (req, res, next) => {
 
+    if (!req?.file?.filename || !req.params.id){
+        return res.status(StatusCodes.NOT_FOUND)
+    }
     const filename = req.file.filename
-    const profileId = req.params.id;
+    const profileId = req.params.id;//
+
+
+
     console.log(filename, profileId)
 //
     const user = await usersService.addProfilePicture({filename:filename, profileId: profileId});
-    if (user.affected < 1){
+    if (user?.affected < 1){
         return res.status(StatusCodes.NOT_FOUND).json({error: "user not found or you dont have rights to do this operation"})
     }
 
@@ -139,7 +145,9 @@ router.route("/profile/image/:id").get(async (req,res, next) => {
 
 
     const image = req.params.id
-    return res.status(StatusCodes.OK).sendFile(image, {root: './public/profiles'})
+    return res.status(StatusCodes.OK).sendFile(image, {root: './public/profiles'}, (err => {
+        res.status(StatusCodes.NOT_FOUND)
+    }))
 })
 
 export default router
