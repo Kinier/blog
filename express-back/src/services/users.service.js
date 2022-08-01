@@ -1,5 +1,6 @@
 import * as usersRepository from "../models/users.repository.js";
 import jwt from "jsonwebtoken"
+import fs from "fs";
 
 
 const getAllUsers = async () => {
@@ -20,6 +21,16 @@ const patchUserFields = async ({id :id, fields: fields}) =>{
 }
 
 const addProfilePicture = async ({filename:filename, profileId: profileId}) =>{
+    const user = await usersRepository.getUserById({id: profileId})
+    if (user) {
+
+        if (user?.profilePictureId) {
+            fs.unlink("./public/profiles/" + user.profilePictureId, ()=> user)
+        }
+
+    }else{
+        return await user // fixme это точно будет работать как надо?
+    }
     return await usersRepository.addProfilePicture({filename:filename, profileId: profileId})
 }
 
