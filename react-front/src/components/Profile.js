@@ -17,10 +17,11 @@ function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCoo
 
         async function _() {
             const answer = await userApi.getUserInfo({ cookie: cookie })
-
+            console.log(answer)
             if (answer?.error) {
+
                 setErrorMessage(answer?.error)
-                if (answer.error === "jwt expired")
+                if (answer.error == "jwt expired")
                     removeCookie("jwt")
             } else {
                 setProfileData(answer)
@@ -29,6 +30,13 @@ function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCoo
 
         _()
 
+    }, [])
+
+
+    useEffect(()=> {
+        if (!cookie?.jwt) {
+            navigate("/register")
+        }
     }, [cookie])
 
 
