@@ -42,7 +42,7 @@ function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: r
         console.log(answer)
     }
 
-    const handleFileUpdate = (e) => {
+    const handleFileUpdate = (e) => { // todo prevent file preview rerender on text inputs changes
         if (e?.target?.files[0]) {
             setAvatarPreview(URL.createObjectURL(e.target.files[0]))
             setAvatar(e.target.files[0])
