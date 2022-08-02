@@ -33,9 +33,9 @@ class userApi {
             console.log(error.message + "Ошибка ")
         }
 
-        if (!response?.ok){
+        if (!response?.ok) {
             return null
-        }else{
+        } else {
             return (response.json())
         }
     }
@@ -74,9 +74,11 @@ class userApi {
             console.log(e.message + "Ошибка ")
         }
 
-        if (!response?.ok){
+        if (response?.status == "401") {
+            return response.json()
+        } else if (!response?.ok) {
             return null
-        }else{
+        } else {
             return (response.json())
         }
 
@@ -105,9 +107,9 @@ class userApi {
         }
 
 
-        if (!response?.ok){
+        if (!response?.ok) {
             return null
-        }else{
+        } else {
             return (response.json())
         }
     }
