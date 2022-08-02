@@ -105,7 +105,11 @@ class userApi {
         }
 
 
-        return (response.json())
+        if (!response?.ok){
+            return null
+        }else{
+            return (response.json())
+        }
     }
 
     async register({username: username, email: email, password: password}) {

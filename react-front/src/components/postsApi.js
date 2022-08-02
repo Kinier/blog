@@ -35,7 +35,11 @@ class postsApi {
             console.log(e.message)
         }
 
-        return (response.json())
+        if (!response?.ok){
+            return null
+        }else{
+            return (response.json())
+        }
     }
 
 
