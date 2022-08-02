@@ -47,9 +47,9 @@ router.route("/someinfo/:id").get( async (req, res, next) => {
 
     console.log(req.params.id)//
     const user = await usersService.getUserById({id: req.params.id});
-    const {id: id, username:username, name:name, surname:surname,} = user
+    const {id: id, username:username, name:name, surname:surname, profilePictureId: profilePictureId} = user
     return res.status(StatusCodes.OK).json(
-        {id: id, username:username, name:name, surname:surname}
+        {id: id, username:username, name:name, surname:surname, profilePictureId:profilePictureId}
     )
 })
 
