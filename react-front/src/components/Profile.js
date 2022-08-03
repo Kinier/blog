@@ -7,6 +7,8 @@ import userApi from "./userApi"
 function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie }) {
     const [errorMessage, setErrorMessage] = useState(null)
     const [profileData, setProfileData] = useState(null)
+    const [isProfileSettingsLoaded, setIsProfileSettingsLoaded] = useState(false)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -25,6 +27,7 @@ function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCoo
                     removeCookie("jwt")
             } else {
                 setProfileData(answer)
+                setIsProfileSettingsLoaded(true)
             }
         }
 
@@ -49,7 +52,7 @@ function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCoo
             <div className="main-content">
                 {errorMessage}
 
-                <ProfileSettings cookie={cookie} setCookie={setCookie} removeCookie={removeCookie} profileData={profileData} setProfileData={setProfileData} />
+                <ProfileSettings cookie={cookie} setCookie={setCookie} removeCookie={removeCookie} profileData={profileData} setProfileData={setProfileData} isProfileSettingsLoaded={isProfileSettingsLoaded}/>
             </div>
 
 

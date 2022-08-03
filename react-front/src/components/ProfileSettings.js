@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import userApi from "./userApi";
 
-function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie, profileData: profileData, setProfileData: setProfileData }) {
+function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie, profileData: profileData, setProfileData: setProfileData, isProfileSettingsLoaded: isProfileSettingsLoaded  }) {
 
     const [avatar, setAvatar] = useState(null)
     const [avatarPreview, setAvatarPreview] = useState(null)
@@ -12,12 +12,13 @@ function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: r
         async function _() {
             const image = await userApi.getProfileAvatarByImageId(profileData?.profilePictureId)
 
+
             setAvatarPreview(image ? URL?.createObjectURL(image) : null)
         }
         if (profileData){
             _()
         }
-    }, [profileData])
+    }, [isProfileSettingsLoaded])
 
 
 
