@@ -1,10 +1,8 @@
 import React from "react";
 
 import PostList from "./PostList";
-import Header from "./Header";
-import SideMenu from "./SideMenu";
 
-function Home({cookie: cookie}) {
+function HomePage({cookie: cookie}) {
 
 
  
@@ -23,4 +21,4 @@ function Home({cookie: cookie}) {
     )
 }
 
-export default Home
+export default HomePage

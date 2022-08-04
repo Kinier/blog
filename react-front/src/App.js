@@ -3,8 +3,8 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import NoPage from "./components/NoPage";
-import Home from "./components/Home";
-import Profile from './components/Profile';
+import HomePage from "./components/HomePage";
+import ProfilePage from './components/ProfilePage';
 import RegisterPage from './components/RegisterPage';
 import { useCookies } from 'react-cookie';
 import LoginPage from './components/LoginPage';
@@ -26,10 +26,10 @@ function App() {
 
                 <Routes>
 
-                    <Route path="/" element={<Home cookie={cookie} />} />
+                    <Route path="/" element={<HomePage cookie={cookie} />} />
                     <Route path="/register" element={<RegisterPage cookie={cookie} setCookie={setCookie} />} />
                     <Route path="/login" element={<LoginPage cookie={cookie} setCookie={setCookie} />} />
-                    <Route path='/profile' element={<Profile cookie={cookie} setCookie={setCookie} removeCookie={removeCookie} />} />
+                    <Route path='/profile' element={<ProfilePage cookie={cookie} setCookie={setCookie} removeCookie={removeCookie} />} />
                     <Route path="/notlogged" element={<NotLogged cookie={cookie} />} />
                     <Route path="/newPost" element={<NewPostPage cookie={cookie} removeCookie={removeCookie} />} />
                     <Route path="/post/:postId" element={<PostPage cookie={cookie}  />} />

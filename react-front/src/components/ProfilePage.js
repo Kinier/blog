@@ -4,7 +4,7 @@ import Header from "./Header";
 import ProfileSettings from "./ProfileSettings";
 import { useNavigate } from "react-router-dom"
 import userApi from "./userApi"
-function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie }) {
+function ProfilePage({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie }) {
     const [errorMessage, setErrorMessage] = useState(null)
     const [profileData, setProfileData] = useState(null)
     const [isProfileSettingsLoaded, setIsProfileSettingsLoaded] = useState(false)
@@ -23,7 +23,7 @@ function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCoo
             if (answer?.error) {
 
                 setErrorMessage(answer?.error)
-                if (answer.error == "jwt expired")
+                if (answer.error == "jwt expired") // TODO если перейти на страницу профиля с другой страницы, то редирект не сработает
                     removeCookie("jwt")
             } else {
                 setProfileData(answer)
@@ -62,4 +62,4 @@ function Profile({ cookie: cookie, setCookie: setCookie, removeCookie: removeCoo
     )
 }
 
-export default Profile
+export default ProfilePage
