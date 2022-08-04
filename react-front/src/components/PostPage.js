@@ -7,7 +7,6 @@ function PostPage() {
     const [postData, setPostData] = useState(null)
     const [creatorInfo, setCreatorInfo] = useState(null)
     const [creatorProfilePicture, setCreatorProfilePicture] = useState(null)
-    const [modal, setModal] = useState(false)
     const {postId} = useParams()
     const navigate = useNavigate()
 
