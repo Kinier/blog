@@ -62,7 +62,7 @@ function PostPage() {
 
 
             setTimeout(() => {
-                document.querySelector("#modal").classList.add("hidden")
+                document?.querySelector("#modal")?.classList?.add("hidden")
 
             }, 5000)
         }
@@ -85,10 +85,10 @@ function PostPage() {
                      className={"hidden flex flex-row w-64 h-64 bg-slate-700 absolute justify-center items-center m-10 rounded-2xl h-32 bg-opacity-80 cursor-pointer"} onClick={handleCreatorIdClick}>
                     <div className={"flex w-full flex-col max-w-2/6 overflow-y-auto"}>
                         <div className={"flex w-full"} >
-                            {creatorInfo?.name}
+                            {creatorInfo?.name || "Имя автора нет"}
                         </div>
                         <div className={"flex w-full"} >
-                            {creatorInfo?.surname}
+                            {creatorInfo?.surname || "Фамилии автора нет"}
                         </div>
 
                     </div>
