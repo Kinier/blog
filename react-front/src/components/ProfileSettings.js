@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import userApi from "./userApi";
+import {Link, Route} from "react-router-dom";
 
 function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie, profileData: profileData, setProfileData: setProfileData, isProfileSettingsLoaded: isProfileSettingsLoaded  }) {
 
@@ -119,12 +120,12 @@ function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: r
 
                 <li className="flex flex-row w-full  my-2 justify-between">
                     <div className="flex w-1/2 justify-end items-center mr-4" >
-                        {profileData?.posts ? "Посты" : "Постов нет"}
+                        {profileData?.postsIds ? "Посты" : "Постов нет"}
 
                     </div>
 
-                    <div value={profileData?.posts || ""} readOnly name="posts" className="flex w-1/2 justify-center items-center bg-opacity-0  opacity bg-transparent resize-none ">
-                        {profileData?.posts}
+                    <div className="flex w-1/2 justify-center items-center bg-opacity-0  opacity bg-transparent resize-none flex-col">
+                        {profileData?.postsIds.map((postId)=> <Link key={postId} to={  `/post/${postId}`}>{postId}</Link>)}
 
                     </div>
 
