@@ -23,7 +23,7 @@ const upload = multer({storage}).array('files', 5);
 
 const router = Router()
 
-router.route("/all").get(async (req, res, next) => {
+router.route("/").get(async (req, res, next) => {
     const posts = await postsService.getAllPosts();
 
     return res.status(StatusCodes.OK).json(posts.map((post) => post))
@@ -58,7 +58,6 @@ router.route("/image/:id").get(async (req,res, next) => {
         return res.status(StatusCodes.OK).sendFile(image, {root: './public'})
 })
 
-// todo сделать мидлвейр на создание поста - типа проверку на пользователя
 router.route("/").post(authMiddleware, upload, async (req, res, next) => {
 
     const fileNames = req.files.map((file)=>{
