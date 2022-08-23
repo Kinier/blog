@@ -43,9 +43,9 @@ router.route("/profile").get( authMiddleware, async (req, res, next) => {
 
 
 router.route("/someinfo/:id").get( async (req, res, next) => {
-    if (!req.params.id)
+    if (!req.params.id.match(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i)){ // v4 uuid
         return res.status(StatusCodes.BAD_REQUEST).json()
-    console.log(req.params.id)//
+    }
     const user = await usersService.getUserById({id: req.params.id});
     const {id: id, username:username, name:name, surname:surname, profilePictureId: profilePictureId} = user
     return res.status(StatusCodes.OK).json(
