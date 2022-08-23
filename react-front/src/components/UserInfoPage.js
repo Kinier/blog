@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import userApi from "./userApi"
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 function UserInfoPage({cookie: cookie}) {
@@ -8,6 +8,7 @@ function UserInfoPage({cookie: cookie}) {
     const {userId} = useParams()
     const [errorMessage, setErrorMessage] = useState(null)
     const [avatarPreview, setAvatarPreview] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const _ = async () => {
@@ -15,6 +16,7 @@ function UserInfoPage({cookie: cookie}) {
                 const userInfo = await userApi.getSomeUserInfo({id: userId})
                 if (userInfo?.error) {
                     setErrorMessage("Чето не сработало")
+                    navigate('/nopage')
                 } else {
                     setUserData(userInfo)
                 }
