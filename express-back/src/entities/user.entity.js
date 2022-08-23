@@ -23,7 +23,7 @@ export const User = new EntitySchema({
         },
         name: {
             type: String,
-            nullable: true
+            nullable: true,
         },
         surname: {
             type: String,
@@ -39,6 +39,10 @@ export const User = new EntitySchema({
             array: true,
             unique: true,
             nullable: true
+        },
+        role: {
+            type: String,
+            default: "user"
         }
     },
 })
