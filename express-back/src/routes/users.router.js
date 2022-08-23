@@ -8,6 +8,7 @@ import {authMiddleware} from "../middleware/auth.middleware.js";
 
 import multer from 'multer'
 import * as postsService from "../services/posts.service.js";
+import {adminMiddleware} from "../middleware/admin.middleware.js";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -21,7 +22,7 @@ const upload = multer({storage}).single('avatar');
 
 const router = Router()
 
-router.route("/").get( async (req, res, next) => {
+router.route("/").get( adminMiddleware ,async (req, res, next) => {
     const users = await usersService.getAllUsers();
 
     return res.status(StatusCodes.OK).json(users.map((user) => user))
@@ -41,10 +42,10 @@ router.route("/profile").get( authMiddleware, async (req, res, next) => {
     )
 })
 
-
+// todo /profile/:id
 router.route("/someinfo/:id").get( async (req, res, next) => {
     if (!req.params.id.match(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i)){ // v4 uuid
-        return res.status(StatusCodes.BAD_REQUEST).json()
+        return res.status(StatusCodes.NOT_FOUND).json({error : "bad uuid"})
     }
     const user = await usersService.getUserById({id: req.params.id});
     const {id: id, username:username, name:name, surname:surname, profilePictureId: profilePictureId} = user
@@ -74,7 +75,7 @@ router.route("/register").post(async (req, res, next) => { //fixme change routes
     if (newUser) {
         return res.status(StatusCodes.OK).json(
             jwt.sign(
-                {id: newUser.id}, process.env.SECRET_KEY,
+                {id: newUser.id, role: 'user'}, process.env.SECRET_KEY,
                 {"expiresIn": "24h"})
             )
     } else {
@@ -85,14 +86,14 @@ router.route("/register").post(async (req, res, next) => { //fixme change routes
 router.route("/login").post(async (req, res, next) => {
     const {email, password} = req.body
 
-    const newUser = await usersService.getUserByEmailAndPassword(
+    const user = await usersService.getUserByEmailAndPassword(
         {email: email, password: password}
     );
 
-    if (newUser) {
+    if (user) {
         return res.status(StatusCodes.OK).json(
             jwt.sign(
-                {id: newUser.id}, process.env.SECRET_KEY,
+                {id: user.id, role: user.role}, process.env.SECRET_KEY, // FIXME ПОМЕНЯТЬ ПОТОМ
                 {"expiresIn": "24h"})
         )
     } else {
@@ -105,7 +106,7 @@ router.route("/:id").patch(authMiddleware,async (req,res) =>{
     if (req.params.id !== req.user.id){
         return res.status(StatusCodes.BAD_REQUEST).json({"error": "there is somthing strange about your token"})
     }
-////
+
     const updatedUser = await usersService.patchUserFields({id :req.params.id, fields: req.body})
     if (updatedUser){
         return res.status(StatusCodes.OK).json({updatedUser})
@@ -140,8 +141,8 @@ router.route("/profile/:id/image").patch(authMiddleware, upload, async (req, res
 
     return res.status(StatusCodes.OK).json(user)
 })
-
-router.route("/profile/image/:id").get(async (req,res, next) => { // todo /profile/:id/image
+// todo /profile/:id/image
+router.route("/profile/image/:id").get(async (req,res, next) => {
 
 
     const image = req.params.id
