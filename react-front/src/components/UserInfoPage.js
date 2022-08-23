@@ -14,7 +14,7 @@ function UserInfoPage({cookie: cookie}) {
         const _ = async () => {
             if (userId) {
                 const userInfo = await userApi.getSomeUserInfo({id: userId})
-                if (userInfo?.error) {
+                if (userInfo?.error || !userInfo) {
                     setErrorMessage("Чето не сработало")
                     navigate('/nopage')
                 } else {
