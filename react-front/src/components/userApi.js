@@ -83,6 +83,32 @@ class userApi {
         }
 
     }
+// for admin
+    async getUsers({cookie: cookie}) {
+        let response = null
+
+        try {
+            response = await fetch(URL, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${cookie?.jwt}`
+                },
+
+            })
+        } catch (e) {
+            console.log(e.message + "Ошибка ")
+        }
+
+        if (response?.status == "401") {
+            return response.json()
+        } else if (!response?.ok) {
+            return null
+        } else {
+            return (response.json())
+        }
+
+    }
 
     /**
      *get user username, name, surname, id
