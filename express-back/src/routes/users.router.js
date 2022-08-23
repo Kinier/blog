@@ -43,8 +43,8 @@ router.route("/profile").get( authMiddleware, async (req, res, next) => {
 
 
 router.route("/someinfo/:id").get( async (req, res, next) => {
-
-
+    if (!req.params.id)
+        return res.status(StatusCodes.BAD_REQUEST).json()
     console.log(req.params.id)//
     const user = await usersService.getUserById({id: req.params.id});
     const {id: id, username:username, name:name, surname:surname, profilePictureId: profilePictureId} = user
@@ -141,7 +141,7 @@ router.route("/profile/:id/image").patch(authMiddleware, upload, async (req, res
     return res.status(StatusCodes.OK).json(user)
 })
 
-router.route("/profile/image/:id").get(async (req,res, next) => {
+router.route("/profile/image/:id").get(async (req,res, next) => { // todo /profile/:id/image
 
 
     const image = req.params.id
