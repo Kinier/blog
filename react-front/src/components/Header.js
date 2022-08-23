@@ -42,7 +42,7 @@ function Header({ cookie: cookie }) {
     return (
         <div className="flex flex-col items-center">
             <div className="header bg-slate-500 rounded-xl bg-opacity-20">
-                <div className="cursor-pointer" onClick={handleHomePage}>kinier's blog</div>
+                <div className="cursor-pointer" onClick={handleHomePage}>super blog</div>
                 <div className="cursor-pointer" onClick={handleNewPostPage}>Новый пост</div>
                 <div className="cursor-pointer" onClick={handleProfile}>{cookie?.jwt ? "My profile" : "Sign up/in"}</div>
             </div>
