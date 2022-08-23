@@ -7,21 +7,17 @@ function NewPostPage({ cookie: cookie, removeCookie: removeCookie }) {
 
 
 
-
     const navigate = useNavigate()
 
     const [formInputs, setFormInputs] = useState({ "title": "", "text": "" })
     const [errorMessage, setErrorMessage] = useState(null)
     const [uploadedFilePreview, setUploadedFilePreview] = useState(null)
     const [uploadedFiles, setUploadedFiles] = useState([])
+
     useEffect(() => {
         if (!cookie?.jwt) {
             navigate("/notLogged")
         }
-
-        return (() => {
-
-        })
     }, [cookie])
 
     const handleFormInputs = async (e) => {
