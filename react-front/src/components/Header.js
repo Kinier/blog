@@ -8,7 +8,7 @@ function Header({ cookie: cookie }) {
         navigate('/')
     }
     const handleNewPostPage = () => {
-        navigate('/newPost')
+        navigate(cookie?.jwt ? "/newPost" : "/notlogged")
     }
     const handleProfile = () => {
 
