@@ -12,6 +12,7 @@ import NotLogged from "./components/NotLoggedPage";
 import NewPostPage from './components/NewPostPage';
 import Header from './components/Header';
 import PostPage from "./components/PostPage"
+import UserInfoPage from "./components/UserInfoPage";
 
 function App() {
     const [cookie, setCookie, removeCookie] = useCookies(['jwt']);
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/newPost" element={<NewPostPage cookie={cookie} removeCookie={removeCookie} />} />
                     <Route path="/post/:postId" element={<PostPage cookie={cookie}  />} />
                     <Route path="*" element={<NoPage />} />
+                    <Route path="/users/:userId" element={<UserInfoPage />} />
 
                 </Routes>
             </BrowserRouter>
