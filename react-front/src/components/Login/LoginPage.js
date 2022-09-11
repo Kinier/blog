@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import Header from "./Header";
-import RegisterForm from './RegisterForm'
+import Header from "../Header";
+import RegisterForm from '../Register/RegisterForm'
 import {useNavigate} from "react-router-dom"
 import LoginForm from "./LoginForm"
 

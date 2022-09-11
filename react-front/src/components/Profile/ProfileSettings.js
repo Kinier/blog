@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import userApi from "./userApi";
+import userApi from "../Api/userApi";
 import {Link, Route} from "react-router-dom";
 
 function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie, profileData: profileData, setProfileData: setProfileData, isProfileSettingsLoaded: isProfileSettingsLoaded  }) {
@@ -118,14 +118,14 @@ function ProfileSettings({ cookie: cookie, setCookie: setCookie, removeCookie: r
                     <button className="flex items-center" onClick={addAvatarToProfile}>Изменить</button>
                 </li>
 
-                <li className="flex flex-row w-full  my-2 justify-between">
+                <li className="flex flex-row w-full  my-2">
                     <div className="flex w-1/2 justify-end items-center mr-4" >
                         {profileData?.postsIds ? "Посты" : "Постов нет"}
 
                     </div>
 
                     <div className="flex w-1/2 justify-center items-center bg-opacity-0  opacity bg-transparent resize-none flex-col">
-                        {profileData?.postsIds.map((postId)=> <Link key={postId} to={  `/post/${postId}`}>{postId}</Link>)}
+                        {profileData?.postsIds?.map((postId)=> <Link key={postId} to={  `/post/${postId}`}>{postId}</Link>)}
 
                     </div>
 

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import postsApi from './postsApi'
-import userApi from "./userApi";
+import postsApi from '../Api/postsApi'
+import userApi from "../Api/userApi";
 function NewPostPage({ cookie: cookie, removeCookie: removeCookie }) {
 
 

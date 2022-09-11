@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import postsApi from "./postsApi";
-import userApi from "./userApi";
+import postsApi from "../Api/postsApi";
+import userApi from "../Api/userApi";
 import {useNavigate, useParams} from "react-router-dom"
 
 function PostPage() {

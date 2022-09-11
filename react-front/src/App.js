@@ -2,18 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import NoPage from "./components/NoPage";
-import HomePage from "./components/HomePage";
-import ProfilePage from './components/ProfilePage';
-import RegisterPage from './components/RegisterPage';
+import NoPage from "./components/Errors/NoPage";
+import HomePage from "./components/Home/HomePage";
+import ProfilePage from './components/Profile/ProfilePage';
+import RegisterPage from './components/Register/RegisterPage';
 import { useCookies } from 'react-cookie';
-import LoginPage from './components/LoginPage';
-import NotLogged from "./components/NotLoggedPage";
-import NewPostPage from './components/NewPostPage';
+import LoginPage from './components/Login/LoginPage';
+import NotLogged from "./components/Errors/NotLoggedPage";
+import NewPostPage from './components/Post/NewPostPage';
 import Header from './components/Header';
-import PostPage from "./components/PostPage"
-import UserInfoPage from "./components/UserInfoPage";
-import AdminPage from "./components/AdminPage";
+import PostPage from "./components/Post/PostPage"
+import UserInfoPage from "./components/Profile/UserInfoPage";
+import AdminPage from "./components/Admin/AdminPage";
 
 function App() {
     const [cookie, setCookie, removeCookie] = useCookies(['jwt']);

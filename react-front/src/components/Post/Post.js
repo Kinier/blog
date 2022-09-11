@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import postsApi from "./postsApi";
+import postsApi from "../Api/postsApi";
 
 function Post({ post: post }) {
     const navigate = useNavigate()

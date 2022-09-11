@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Post from "./Post"
-import userApi from "./userApi";
-import postsApi from "./postsApi";
+import userApi from "../Api/userApi";
+import postsApi from "../Api/postsApi";
 
 
 
@@ -13,12 +13,14 @@ function PostList() {
     useEffect(() => {
         async function _(){
             document.getElementById("posts-list__end").style.backgroundColor = 'white'
+            // fixme это не бэм, вообще нахуй я это сделал, но пофикшу потом как нибуь
             const newPosts = await postsApi.getSomePosts(postsLoadedCount.current)
             if (newPosts.length != 0) {
                 setPostsMinimal([...postsMinimal, ...newPosts])
                 postsLoadedCount.current += newPosts.length
             }
             document.getElementById("posts-list__end").style.backgroundColor = 'transparent'
+            // fixme это не бэм, вообще нахуй я это сделал, но пофикшу потом как нибуь
         }
 
         _()
@@ -36,11 +38,9 @@ function PostList() {
     const handleScroll = async (e) => {
         if (isItOkayToUpdate.current == true) {
             if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 200) {
-                console.log("Должно быть")
                 document.getElementById("posts-list__end").style.backgroundColor = 'white'
                 const newPosts = await postsApi.getSomePosts(postsLoadedCount.current)
                 if (newPosts.length != 0) {
-                    console.log("СЮДА БЛЯ ДОШЛО")
                     setPostsMinimal([...postsMinimal, ...newPosts])
                     postsLoadedCount.current += newPosts.length
                 }

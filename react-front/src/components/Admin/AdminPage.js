@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import postsApi from "./postsApi";
-import userApi from './userApi'
+import postsApi from "../Api/postsApi";
+import userApi from '../Api/userApi'
 import {useNavigate} from "react-router-dom";
 
 function AdminPage({cookie: cookie}) {

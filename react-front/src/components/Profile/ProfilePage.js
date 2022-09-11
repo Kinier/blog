@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import Header from "./Header";
+import Header from "../Header";
 import ProfileSettings from "./ProfileSettings";
 import { useNavigate } from "react-router-dom"
-import userApi from "./userApi"
+import userApi from "../Api/userApi"
 function ProfilePage({ cookie: cookie, setCookie: setCookie, removeCookie: removeCookie }) {
     const [errorMessage, setErrorMessage] = useState(null)
     const [profileData, setProfileData] = useState(null)
